@@ -192,5 +192,7 @@ print "predict time:", round(time()-t1, 3), "s"
 accuracy_score(labels_test,pred_r10000)
 print "the accuracy of rbf10000 is",accuracy_score(pred_r10000,labels_test)
 print "the element of 10 is",pred_r10000[10]
+print "the element of 26 is",pred_r10000[26]
+print "the element of 50 is",pred_r10000[50]
 
 

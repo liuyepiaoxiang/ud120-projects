@@ -30,15 +30,46 @@ plt.show()
 
 ### your code here!  name your classifier object clf if you want the 
 ### visualization code (prettyPicture) to show you the decision boundary
+### KNN algorithm
+### TODO:该算法还未实现
+from sklearn.neighbors import NearestNeighbors
+from sklearn.model_selection import cross_val_score
+import numpy as np
+from sklearn.metrics import accuracy_score
+nbrs = NearestNeighbors(n_neighbors=2, algorithm='ball_tree')
+nbrs.fit(features_train, labels_train)
+#nbrs_score = cross_val_score(nbrs,features_test)
+#predict_knn = nbrs.predict(features_test)
+#accuracy_score_knn = accuracy_score(labels_test,predict_knn)
+#print 'accuracy_score_knn:', accuracy_score_knn
+#print 'accuracy_score_mean_nbrs:', nbrs_score.mean()
+
+### adaboost algorithm
+from sklearn.ensemble import AdaBoostClassifier
+
+adab = AdaBoostClassifier(n_estimators= 100)
+#adab.fit(features_train,labels_train)
+adaa_score = cross_val_score(adab,features_train,labels_train)
+##predict_adab = adab.predict(features_test)
+##accuracy_score_adab = accuracy_score(features_test)
+##print 'accuracy_score_adab:', accuracy_score_adab
+print 'accuracy_score_mean_adab:', adaa_score.mean()
 
 
 
-
-
-
-
+### Random forest algorithm
+from sklearn.ensemble import RandomForestClassifier
+rmf = RandomForestClassifier(n_estimators=10)
+rmf.fit(features_train,labels_train)
+#rmf_score = cross_val_score(rmf,features_test)
+predict_rmf = rmf.predict(features_test)
+accuracy_score_rmf = accuracy_score(labels_test,predict_rmf)
+print 'accuracy_score_rmf:', accuracy_score_rmf
+#print 'accuracy_score_mean_rmf:', rmf_score.mean()
 
 try:
-    prettyPicture(clf, features_test, labels_test)
+    #prettyPicture(nbrs, features_test, labels_test)
+    #prettyPicture(adab, features_test, labels_test)
+    prettyPicture(rmf, features_test, labels_test)
 except NameError:
     pass
