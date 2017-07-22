@@ -87,3 +87,6 @@ if len(cleaned_data) > 0:
 else:
     print "outlierCleaner() is returning an empty list, no refitting to be done"
 
+print('coef:',reg.coef_)
+score = reg.score(ages_test,net_worths_test)
+print('score',score);

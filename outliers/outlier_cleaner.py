@@ -16,11 +16,12 @@ def outlierCleaner(predictions, ages, net_worths):
     ### your code goes here
     maxP = []
     for i in range(len(predictions)):
-        maxP[i] = predictions[i][0]
-        for j in range(len(predictions) / 10):
-            maxindex = maxP.index(max(maxP))
-            maxP.remove(max(maxP))
-            cleaned_data[i] = (ages[maxindex], net_worths(maxindex), predictions[maxindex])
+        maxP.append(predictions[i][0]-net_worths[i][0])
+        cleaned_data.append((ages[i], net_worths[i], predictions[i]))
+    for j in range(len(predictions) / 10):
+        maxindex = maxP.index(max(maxP))
+        maxP.remove(max(maxP))
+        cleaned_data.remove(cleaned_data[maxindex])
 
     return cleaned_data
 
