@@ -17,6 +17,7 @@ def outlierCleaner(predictions, ages, net_worths):
     maxP = []
     print('len', len(predictions))
     for i in range(len(predictions)):
+
         maxP.append(predictions[i])
         for j in range(len(predictions) / 10):
             maxindex = maxP.index(max(maxP))

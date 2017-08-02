@@ -43,13 +43,32 @@ data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r")
 ### there's an outlier--remove it! 
 data_dict.pop("TOTAL", 0)
 
+esoArray = []
+sAaary = []
+for key in data_dict:
+    ob = data_dict[key]
+    obItem = ob['exercised_stock_options']
+    obSalary = ob['salary']
+    if(obItem != 'NaN'):
+        esoArray.append(obItem)
+    if(obSalary !='NaN'):
+        sAaary.append(obSalary)
+MaxOfEso = max(esoArray)
+MinOfEso = min(esoArray)
+MaxOfSal = max(sAaary)
+MinOfSal = min(sAaary)
+
+print('max of exercised_stock_options is:',max(esoArray))
+print('min of exercised_stock_options is:',min(esoArray))
+print('max of salary is:',max(sAaary))
+print('min of salary is:',min(sAaary))
 
 ### the input features we want to use 
 ### can be any key in the person-level dictionary (salary, director_fees, etc.) 
 feature_1 = "salary"
 feature_2 = "exercised_stock_options"
 poi  = "poi"
-features_list = [poi, feature_1, feature_2]
+features_list = [poi, feature_1, feature_2, "total_payments"]
 data = featureFormat(data_dict, features_list )
 poi, finance_features = targetFeatureSplit( data )
 
@@ -58,13 +77,15 @@ poi, finance_features = targetFeatureSplit( data )
 ### you'll want to change this line to 
 ### for f1, f2, _ in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
-for f1, f2 in finance_features:
-    plt.scatter( f1, f2 )
+for f1, f2, f3 in finance_features:
+    plt.scatter( f1, f2, f3 )
 plt.show()
 
 ### cluster here; create predictions of the cluster labels
 ### for the data and store them to a list called pred
-
+from sklearn.cluster import KMeans
+kmeans = KMeans(n_clusters =2,random_state=0).fit(data)
+pred = kmeans.predict(data)
 
 
 
